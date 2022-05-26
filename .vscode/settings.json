@@ -1,0 +1,6 @@
+{
+    "powershell.codeFormatting.autoCorrectAliases": true,
+    "powershell.codeFormatting.pipelineIndentationStyle": "NoIndentation",
+    "powershell.codeFormatting.preset": "OTBS",
+    "powershell.codeFormatting.useConstantStrings": true
+}
