@@ -38,6 +38,6 @@ function Publish {
     $Version = GetVersion;
 
    # My code
-   build.exe 'myproject' --version $Version
+   build.exe 'myproject' --version $Version.Prefix
 }
 ```
