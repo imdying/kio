@@ -2,13 +2,7 @@
 An over-engineered build script with semantic versioning support.
 
 ## Installation
-Download the latest release from [GitHub](https://github.com/imdying/kio/releases/latest), or.
-<br/>
-<br/>
-PowerShell (Windows): 
-```powershell
-iwr 'https://raw.githubusercontent.com/imdying/kio/main/install.ps1' | iex
-```
+Download the [latest release](https://github.com/imdying/Kio/releases/latest/download/Kio.exe) and read the [notice.txt](https://raw.githubusercontent.com/imdying/Kio/main/src/notice.txt).
 
 ## Getting Started
 Once installed, generate a template and open the file `build.psm1`. Inside, there will be 3 functions, each function representing a build type.
@@ -30,7 +24,7 @@ function Publish {
 ### Invoking the version control input.
 
 ```powershell
-# This imports 'PromptVersionControl' and other related functions.
+# Import 'PromptVersionControl' and other related functions.
 ImportDependencies;
 
 function Publish {

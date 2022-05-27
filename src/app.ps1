@@ -8,6 +8,7 @@ if ($args.Length -eq 0) {
     $Version = (Get-Content -Raw (Join-Path $PSScriptRoot 'app.json') | ConvertFrom-Json).Version;
 
     'Kio ' + $Version
+    'Copyright (C) 2022 Blank.'
     "`nCommands:"
     '  New       Create a template.'
     '  Run       Execute the build script.'

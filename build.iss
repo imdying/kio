@@ -17,14 +17,17 @@ SolidCompression=yes
 OutputDir=bin
 OutputBaseFilename={#MyAppName}
 ; UninstallDisplayIcon={uninstallexe}
-UninstallDisplayName={#MyAppName} -  {#ApplicationVersion}
+UninstallDisplayName={#MyAppName} {#ApplicationVersion}
 
 [Files]
 Source: ".\src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+
+[Run]
+Filename: "{app}\notice.txt"; Description: "View NOTICE.txt"; Flags: postinstall nowait shellexec;
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);
 begin
   if CurPageID = wpWelcome then
-    WizardForm.Caption := 'Setup - Kio {#ApplicationVersion}';
+    WizardForm.Caption := 'Setup - {#MyAppName} {#ApplicationVersion}';
 end;
