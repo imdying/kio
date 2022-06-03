@@ -22,40 +22,54 @@ if ($args.Length -eq 0) {
 # or 'Get-Error'
 switch ($args[0]) {
     Run {
-        Import-Module -Force -Scope Local (Join-Path $pwd.Path 'build.psm1');
+        Import-Module (Join-Path $pwd.Path 'build.psm1') -Force -Scope Local;
 
-        enum BuildType {
-            Debug = 1
-            Release
-            Publish
+        # Key    is the method name.
+        # Value  is what gets displayed when outputing.
+        $BuildType = [ordered]@{ 
+            Debug   = 'Debug';
+            Release = 'Release';
+            Publish = 'Publish';
+        }
+
+        $GetBuilds = {
+            $Array = New-Object System.Collections.Generic.List[System.String];
+
+            for ($i = 0; $i -lt $BuildType.Count; $i++) {
+                $Name  = $BuildType[$i];                                                        # The value of the $BuildType.Key.
+                $Method = $BuildType.Keys | Where-Object { $BuildType[$_] -eq "$Name" };        # The $BuildType.Key.
+
+                if ([bool](Get-Command "$Method" -errorAction SilentlyContinue)) {
+                    $Array.Add($Name);
+                    continue;
+                }
+
+                $BuildType.RemoveAt($i);
+                $i--;
+            }
+
+            return $Array.ToArray();
+        }.Invoke();
+
+        if ($GetBuilds.Count -lt 1) {
+            Write-Error 'No build-methods were found in the build.';
         }
 
         # If the input is passed through args, $Option and this are basically the same.
-        $Select = $args.Length -gt 1 ? ([Enum]::ToObject([BuildType], $args[1])) : 0;
-        $Option = AskUserInput 'Target a build by specifying the numeric value of the options below.' -Options 'Debug', 'Release', 'Publish' -Select $Select;
-
-        # The length of BuildType.
-        $EnumSize = [Enum]::GetValues([BuildType]).Length;
+        $Select = $args.Length -gt 1 ? [Int32]$args[1] : 0;
+        $Option = AskUserInput 'Target a build by specifying the numeric value of the options below.' -Options $GetBuilds -Select $Select
 
         # 
-        if ($Option -gt $EnumSize -or $Option -lt 1) {
+        if ($Option -gt $GetBuilds.Count -or $Option -lt 1) {
             throw 'Specified value doesn''t correlate with the available options.';
         }
         
         # Executing the build.
-        for ($i = 1; $i -lt $EnumSize + 1; $i++) {
-            if ($Option -eq [Enum]::ToObject([BuildType], $i)) {
-                $build = [BuildType]$i;
+        $Name  = $GetBuilds[$Option - 1];                                               # Value.
+        $Build = $BuildType.Keys | Where-Object { $BuildType[$_] -eq "$Name" };    # Key.
 
-                # Targeting build: $i
-                Write-Host "Targeting '$build'" -ForegroundColor Magenta;
-
-                # Only works if the function name matches
-                & $build;
-
-                return;
-            }
-        }
+        Write-Host "Targeting '$Name'" -ForegroundColor Magenta;
+        & $Build;
     }
 
     New {
