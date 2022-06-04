@@ -4,11 +4,20 @@
 #>
 ImportDependencies;
 
+function Debug {
+    # Todo
+}
+
+function Release {
+    # Todo
+}
+
 function Publish {
-    $Version = PromptVersionControl;
+    PromptVersionControl;
+    $Version = GetVersion;
 
     # App versioning
-    ConvertTo-Json -InputObject @{ Version = $Version.Absolute } | Out-File '.\src\app.json';
+    ConvertTo-Json -InputObject @{Version = $Version.Version} | Out-File '.\src\app.json';
 
     # Packing
     $Issc = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6' 'ISCC.exe'; 

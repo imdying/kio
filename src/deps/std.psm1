@@ -9,21 +9,16 @@ $ErrorActionPreference = 'Stop';
         -
 
     .DESCRIPTION
-        Returns an object that contains the version number, prefix and suffix of the current version.
+        Returns an object that contains version number, prefix and suffix of the current version.
 #>
 function GetVersion {
-    [CmdletBinding()]
-    param (
-        [string] $VersionNumber = $null
-    )
-    
-    $Version = $VersionNumber ?? [Configuration]::GetVersion().Current;
+    $Version = [Configuration]::GetVersion().Current;
     $ParsedVersion = [SemVer]::Parse($Version);
 
     return @{
-        Prefix   = [string]::Format('{0}.{1}.{2}', $ParsedVersion.Major, $ParsedVersion.Minor, $ParsedVersion.Patch);
-        Suffix   = $ParsedVersion.IsPreRelease ? [string]::Format('{0}.{1}.{2}', $ParsedVersion.PreRelease, $ParsedVersion.Build, $ParsedVersion.Revision) : $null;
-        Absolute = $Version;
+        Prefix  = [string]::Format('{0}.{1}.{2}', $ParsedVersion.Major, $ParsedVersion.Minor, $ParsedVersion.Patch);
+        Suffix  = $ParsedVersion.IsPreRelease ? [string]::Format('{0}.{1}.{2}', $ParsedVersion.PreRelease, $ParsedVersion.Build, $ParsedVersion.Revision) : $null;
+        Version = $Version;
     };
 }
 
@@ -226,6 +221,4 @@ function PromptVersionControl {
     if ($HandleRelease) {
         [Configuration]::UpdateVersion($Current, $Previous);
     }
-    
-    return GetVersion($Current);
 }

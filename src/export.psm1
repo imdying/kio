@@ -11,7 +11,7 @@ $deps = Join-Path $root 'deps';
         An over-engineered build script with semantic versioning support.
 
     .LINK
-        https://github.com/imdying/kio/
+        https://github.com/imdying/Kio/
 #>
 function Kio {
     param($p1, $p2)
@@ -39,7 +39,7 @@ function Kio {
     Import Kio's dependencies in the current session.
 
 .LINK
-        https://github.com/imdying/kio/
+        https://github.com/imdying/Kio/
 #>
 function ImportDependencies {
     Import-Module -Global -Force (Join-Path $deps 'std.psm1');

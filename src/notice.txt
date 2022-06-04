@@ -1,11 +1,11 @@
 Append the appropriate content below to your global powershell profile.
 To get the path of the global profile, call the variable '$PROFILE.AllUsersAllHosts'.
 
-# Custom path
-Import-Module -Global -Force 'PATH_TO_KIO\export.psm1';
-
-# Program Files
+# x64
 Import-Module -Global -Force (Join-Path "$env:ProgramW6432" 'Kio' 'export.psm1');
 
-# Program Files (x86)
+# x86
 Import-Module -Global -Force (Join-Path "${env:ProgramFiles(x86)}" 'Kio' 'export.psm1');
+
+# Custom path
+Import-Module -Global -Force 'PATH_TO_KIO\export.psm1';
