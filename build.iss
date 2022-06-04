@@ -15,7 +15,7 @@ DefaultGroupName=Programs
 Compression=lzma2
 SolidCompression=yes
 OutputDir=bin
-OutputBaseFilename=bs_installer
+OutputBaseFilename=bs_setup
 ; UninstallDisplayIcon={uninstallexe}
 UninstallDisplayName={#MyAppName} {#ApplicationVersion}
 
