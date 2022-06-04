@@ -15,7 +15,7 @@ DefaultGroupName=Programs
 Compression=lzma2
 SolidCompression=yes
 OutputDir=bin
-OutputBaseFilename={#MyAppName}
+OutputBaseFilename=bs_installer
 ; UninstallDisplayIcon={uninstallexe}
 UninstallDisplayName={#MyAppName} {#ApplicationVersion}
 
@@ -23,7 +23,7 @@ UninstallDisplayName={#MyAppName} {#ApplicationVersion}
 Source: ".\src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Run]
-Filename: "{app}\notice.txt"; Description: "View NOTICE.txt"; Flags: postinstall nowait shellexec;
+Filename: "{app}\etc\notice.txt"; Description: "View NOTICE.txt"; Flags: postinstall nowait shellexec;
 
 [Code]
 procedure CurPageChanged(CurPageID: Integer);

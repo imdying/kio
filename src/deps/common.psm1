@@ -81,3 +81,10 @@ function AskUserInput {
 	
     return $Result;
 }
+
+function PrintError {
+    param($p1)
+
+    Write-Host "$p1" -ForegroundColor Red;
+    exit;
+}

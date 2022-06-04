@@ -1,7 +1,5 @@
-<#
-    Tested on PowerShell 7.2.3
-    For more information, refer to https://github.com/imdying/kio
-#>
+# Tested on PowerShell 7.2
+# For more information, refer to https://github.com/imdying/kio
 
 function Debug {
     # Todo

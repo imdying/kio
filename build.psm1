@@ -1,25 +1,12 @@
-<#
-    Tested on PowerShell 7.2.3
-    For more information, refer to https://github.com/imdying/kio
-#>
+# Tested on PowerShell 7.2
+# For more information, refer to https://github.com/imdying/kio
+
 ImportDependencies;
 
-function Debug {
-    # Todo
-}
-
-function Release {
-    # Todo
-}
-
 function Publish {
-    PromptVersionControl;
-    $Version = GetVersion;
+    $Version = PromptVersionControl;
+    $Compile = Join-Path "${env:ProgramFiles(x86)}" 'Inno Setup 6' 'ISCC.exe';
 
-    # App versioning
-    ConvertTo-Json -InputObject @{Version = $Version.Version} | Out-File '.\src\app.json';
-
-    # Packing
-    $Issc = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6' 'ISCC.exe'; 
-    & $Issc '.\build.iss' "/DApplicationVersion=$($Version.Prefix)";
+    ConvertTo-Json -InputObject @{ Version = $Version.Absolute } | Out-File '.\src\app\app.json';   # App versioning
+    & $Compile '.\build.iss' "/DApplicationVersion=$($Version.Prefix)";                             # Packing
 }
