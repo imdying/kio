@@ -2,7 +2,7 @@
 An over-engineered build script with semantic versioning support.
 
 ## Installation
-Download the [latest release](https://github.com/imdying/kio/releases/latest/download/bs_installer.exe) and read the [notice.txt](https://raw.githubusercontent.com/imdying/kio/main/src/notice.txt).
+Download the [latest release](https://github.com/imdying/kio/releases/latest/download/bs_installer.exe) and read the [notice.txt](https://raw.githubusercontent.com/imdying/kio/main/src/etc/notice.txt).
 
 ## Getting Started
 Once installed, open a powershell console, `cd` into a directory and enter this command to generate a template.
