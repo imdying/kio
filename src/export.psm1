@@ -1,5 +1,6 @@
 $root = $PSScriptRoot;
 $deps = Join-Path $root 'deps';
+$app  = Join-Path $root 'bin';
 $ErrorActionPreference = 'Stop';
 
 <#
@@ -15,7 +16,7 @@ $ErrorActionPreference = 'Stop';
 function Kio {
     param($p1, $p2)
 
-    $script = Join-Path $root 'app' 'app.ps1';
+    $script = Join-Path $app 'app.ps1';
     $script:args = $null;
 
     foreach ($key in $PSBoundParameters.keys) {

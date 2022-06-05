@@ -7,6 +7,6 @@ function Publish {
     $Version = PromptVersionControl;
     $Compile = Join-Path "${env:ProgramFiles(x86)}" 'Inno Setup 6' 'ISCC.exe';
 
-    ConvertTo-Json -InputObject @{ Version = $Version.Absolute } | Out-File '.\src\app\app.json';   # App versioning
+    ConvertTo-Json -InputObject @{ Version = $Version.Absolute } | Out-File '.\src\bin\app.json';   # App versioning
     & $Compile '.\build.iss' "/DApplicationVersion=$($Version.Prefix)";                             # Packing
 }
