@@ -18,6 +18,7 @@ OutputDir=bin
 OutputBaseFilename=bs_installer
 ; UninstallDisplayIcon={uninstallexe}
 UninstallDisplayName={#MyAppName} {#ApplicationVersion}
+SetupIconFile=compiler:SetupClassicIcon.ico
 
 [Files]
 Source: ".\src\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs

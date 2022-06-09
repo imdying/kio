@@ -101,7 +101,8 @@ switch ($args[0]) {
     }
 
     'New' {
-        $Tmpls = Join-Path $PSScriptRoot 'etc' 'templates';
+        $Source = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, "..\etc"));
+        $Tmpls = Join-Path $Source 'templates';
         $Files = (Join-Path $Tmpls 'build.json'), (Join-Path $Tmpls 'build.psm1');
 
         for ($i = 0; $i -lt $Files.Length; $i++) {
